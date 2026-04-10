@@ -5,4 +5,5 @@ import com.lingyu.entity.User;
 
 public interface UserService extends IService<User> {
     void TestRedis(String name,String password);
+    void TestSendKafka(String name,String password);
 }

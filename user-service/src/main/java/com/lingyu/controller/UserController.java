@@ -36,4 +36,8 @@ public class UserController {
     public void testRedis(@RequestBody RedisUserDTO redisUserDTO) {
         userService.TestRedis(redisUserDTO.getUsername(),redisUserDTO.getPassword());
     }
+    @GetMapping("/testKafka")
+    public void testKafka(@RequestBody RedisUserDTO redisUserDTO) {
+        userService.TestSendKafka(redisUserDTO.getUsername(),redisUserDTO.getPassword());
+    }
 }
