@@ -1,23 +1,33 @@
 server:
   port: 8080
-
 spring:
-  main:
-    web-application-type: reactive
   application:
     name: gateway-server
   cloud:
+    gateway:
+      server:
+        webflux:
+          # 自动从Nacos发现服务
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true # 必须加，解决大小写问题
+
+          # 路由规则（完全不变，只是层级变了）
+          routes:
+            - id: user-service-route
+              uri: lb://user-service
+              predicates:
+                - Path=/user/**
+
+            - id: order-service-route
+              uri: lb://order-service
+              predicates:
+                - Path=/order/**
+
+    # Nacos 注册中心配置
     nacos:
       discovery:
-        server-addr: localhost:8848
-
-    gateway:
-      routes:
-        - id: user-service-route
-          uri: lb://user-service
-          predicates:
-            - Path=/user/**
-        - id: order-service-route
-          uri: lb://order-service
-          predicates:
-            - Path=/order/**
+        server-addr: 127.0.0.1:8848
+        username: nacos # 按需填写
+        password: nacos # 按需填写

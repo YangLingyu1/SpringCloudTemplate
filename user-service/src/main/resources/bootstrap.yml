@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: user-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+  config:
+    import:
+      - optional:nacos:common.yaml?group=DEFAULT_GROUP&refresh=true
+      - optional:nacos:user-service.yaml?group=DEFAULT_GROUP&refresh=true

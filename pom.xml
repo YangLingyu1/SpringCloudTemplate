@@ -1,120 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.mzy</groupId>
-    <artifactId>microservice</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>microservice</name>
-    <description>Demo project for Spring Boot</description>
-    <packaging>pom</packaging>
-    <modules>
-        <module>gateway-server</module>
-        <module>user-service</module>
-        <module>order-service</module>
-    </modules>
-    <properties>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.6.13</spring-boot.version>
-        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
-        <spring-cloud.version>2021.0.5</spring-cloud.version>
-    </properties>
-    <dependencies>
+             xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+        <modelVersion>4.0.0</modelVersion>
+        <groupId>com.lingyu</groupId>
+        <artifactId>youngingservice</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <packaging>pom</packaging>
 
-        <!-- Spring Boot Dependencies -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+        <modules>
+            <module>common</module>
+            <module>gateway-server</module>
+            <module>user-service</module>
+            <module>order-service</module>
+        </modules>
 
-        <!-- Spring Cloud Dependencies -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-dependencies</artifactId>
-            <version>2021.0.5</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
+        <properties>
+            <java.version>21</java.version>
+            <maven.compiler.source>21</maven.compiler.source>
+            <maven.compiler.target>21</maven.compiler.target>
+            <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+            <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- Spring Cloud Alibaba Nacos Discovery -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
+            <netty.version>4.2.10.Final</netty.version>
+            <jackson.version>3.1.1</jackson.version>
 
-        <!-- Spring Cloud OpenFeign -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
+            <spring-boot.version>4.0.3</spring-boot.version>
+            <mybatis-plus.version>3.5.15</mybatis-plus.version>
+            <mysql.version>8.0.33</mysql.version>
+            <redis.version>4.3.0</redis.version>
+            <junit.version>5.9.2</junit.version>
+            <fastjson2.version>2.0.32</fastjson2.version>
+            <lombok.version>1.18.30</lombok.version>
 
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
-        </dependency>
+            <spring-cloud.version>2025.1.1</spring-cloud.version>
+            <spring-cloud-alibaba.version>2025.1.0.0</spring-cloud-alibaba.version>
+        </properties>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-    </dependencies>
-    <dependencyManagement>
         <dependencies>
-
-            <!-- Spring Cloud Dependency Management -->
+            <!-- 1. Lombok -->
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- Spring Boot Dependency Management -->
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+               <optional>true</optional>
+           </dependency>
+            <!-- 2. JSON 工具 -->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- Spring Cloud Alibaba Dependency Management -->
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
             </dependency>
         </dependencies>
-    </dependencyManagement>
 
-    <build>
-        <plugins>
+        <dependencyManagement>
+            <dependencies>
+                <!-- Spring Cloud 版本锁 -->
+                <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-dependencies</artifactId>
+                    <version>${spring-cloud.version}</version>
+                    <type>pom</type>
+                    <scope>import</scope>
+                </dependency>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
+                <!-- Spring Boot 版本锁 -->
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-dependencies</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <type>pom</type>
+                    <scope>import</scope>
+                </dependency>
 
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-            </plugin>
+                <!-- Spring Cloud Alibaba 版本锁 -->
+                <dependency>
+                    <groupId>com.alibaba.cloud</groupId>
+                    <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                    <version>${spring-cloud-alibaba.version}</version>
+                    <type>pom</type>
+                    <scope>import</scope>
+                </dependency>
+                <!-- ====================== 1. Kafka 客户端（学习用） ====================== -->
+    <!--            <dependency>-->
+    <!--                <groupId>org.springframework.kafka</groupId>-->
+    <!--                <artifactId>spring-kafka</artifactId>-->
+    <!--            </dependency>-->
 
-        </plugins>
-    </build>
+                <!-- ====================== 2. MySQL 驱动 ====================== -->
+                <dependency>
+                    <groupId>com.mysql</groupId>
+                    <artifactId>mysql-connector-j</artifactId>
+                    <version>${mysql.version}</version>
+                </dependency>
 
-</project>
+                <!-- ====================== 3. MyBatis-Plus（数据库神器） ====================== -->
+                <dependency>
+                    <groupId>com.baomidou</groupId>
+                    <artifactId>mybatis-plus-spring-boot4-starter</artifactId>
+                    <version>${mybatis-plus.version}</version> <!-- 建议最新稳定版 -->
+                </dependency>
+                <!-- ====================== 4. Lombok ====================== -->
+                <dependency>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok</artifactId>
+                    <version>${lombok.version}</version>
+                </dependency>
+                <!-- ====================== 5. FastJson ====================== -->
+                <dependency>
+                    <groupId>com.alibaba.fastjson2</groupId>
+                    <artifactId>fastjson2</artifactId>
+                    <version>${fastjson2.version}</version>
+                </dependency>
+            </dependencies>
+        </dependencyManagement>
+
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.13.0</version>
+                    <configuration>
+                        <source>21</source>
+                        <target>21</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <configuration>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+    </project>

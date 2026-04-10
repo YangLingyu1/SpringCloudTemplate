@@ -1,0 +1,23 @@
+# 端口
+server:
+  port: 8082
+
+# 服务名称 + Nacos配置
+spring:
+  application:
+    name: order-service  # 服务名
+
+  cloud:
+    nacos:
+      # 1. 服务注册发现
+      discovery:
+        server-addr: localhost:8848
+      # 2. 配置中心（关键！拉取Nacos的common.yml）
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+  # 使用新版 import 方式加载公共配置
+  config:
+    import:
+      - optional:nacos:common.yaml?group=DEFAULT_GROUP&refresh=true
+      - optional:nacos:order-service.yaml?group=DEFAULT_GROUP&refresh=true
