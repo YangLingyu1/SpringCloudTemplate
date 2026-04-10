@@ -1,5 +1,6 @@
 package com.lingyu.controller;
 
+import com.lingyu.dto.RedisUserDTO;
 import com.lingyu.entity.User;
 import com.lingyu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,9 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable("id") String id) {
         userService.removeById(id);
+    }
+    @PostMapping("/testRedis")
+    public void testRedis(@RequestBody RedisUserDTO redisUserDTO) {
+        userService.TestRedis(redisUserDTO.getUsername(),redisUserDTO.getPassword());
     }
 }

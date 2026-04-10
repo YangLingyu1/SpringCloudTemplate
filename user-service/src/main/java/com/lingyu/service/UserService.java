@@ -4,4 +4,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.lingyu.entity.User;
 
 public interface UserService extends IService<User> {
+    void TestRedis(String name,String password);
 }
