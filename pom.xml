@@ -15,25 +15,29 @@
         </modules>
 
         <properties>
+            <!--配置版本-->
             <java.version>21</java.version>
             <maven.compiler.source>21</maven.compiler.source>
             <maven.compiler.target>21</maven.compiler.target>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
+            <maven.compiler.parameters>true</maven.compiler.parameters>
+            <!--安全漏洞补丁-->
             <netty.version>4.2.10.Final</netty.version>
             <jackson.version>3.1.1</jackson.version>
-
+            <!--Spring全家桶-->
             <spring-boot.version>4.0.3</spring-boot.version>
             <mybatis-plus.version>3.5.15</mybatis-plus.version>
             <mysql.version>8.0.33</mysql.version>
             <redis.version>4.3.0</redis.version>
+            <spring-cloud.version>2025.1.1</spring-cloud.version>
+            <spring-cloud-alibaba.version>2025.1.0.0</spring-cloud-alibaba.version>
+            <!--工具类-->
             <junit.version>5.9.2</junit.version>
             <fastjson2.version>2.0.32</fastjson2.version>
             <lombok.version>1.18.30</lombok.version>
+            <jwt.version>0.12.6</jwt.version>
 
-            <spring-cloud.version>2025.1.1</spring-cloud.version>
-            <spring-cloud-alibaba.version>2025.1.0.0</spring-cloud-alibaba.version>
         </properties>
 
         <dependencies>
@@ -89,6 +93,7 @@
                     <groupId>com.mysql</groupId>
                     <artifactId>mysql-connector-j</artifactId>
                     <version>${mysql.version}</version>
+                    <scope>runtime</scope>
                 </dependency>
 
                 <!-- ====================== 3. MyBatis-Plus（数据库神器） ====================== -->
@@ -108,8 +113,27 @@
                     <groupId>com.alibaba.fastjson2</groupId>
                     <artifactId>fastjson2</artifactId>
                     <version>${fastjson2.version}</version>
+                    <!--6. JWT 接口层、实现层、JSON序列化层-->
+                </dependency>
+                <dependency>
+                    <groupId>io.jsonwebtoken</groupId>
+                    <artifactId>jjwt-api</artifactId>
+                    <version>${jwt.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>io.jsonwebtoken</groupId>
+                    <artifactId>jjwt-impl</artifactId>
+                    <version>${jwt.version}</version>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>io.jsonwebtoken</groupId>
+                    <artifactId>jjwt-jackson</artifactId>
+                    <version>${jwt.version}</version>
+                    <scope>runtime</scope>
                 </dependency>
             </dependencies>
+
         </dependencyManagement>
 
         <build>
@@ -122,6 +146,7 @@
                         <source>21</source>
                         <target>21</target>
                         <encoding>UTF-8</encoding>
+                        <parameters>true</parameters>
                     </configuration>
                 </plugin>
 
