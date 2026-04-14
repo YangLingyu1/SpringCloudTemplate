@@ -4,6 +4,11 @@ spring:
   application:
     name: gateway-server
   cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8050 # 连接你刚搭好的控制台
+        port: 8719 # 通信端口，冲突自动+1
+      eager: true # 立即初始化
     gateway:
       server:
         webflux:
